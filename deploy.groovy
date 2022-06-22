@@ -29,13 +29,13 @@ def runPipeline(props){// Deployment start
        }
 
          if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
-          echo "Env is selected ${env.inputEnvType} &&  in ${env.inputnameSpace}-Namespace"
+          echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
             runthistage(props)
        //     runDevDeployStages(Props)
          }
          
          if((env.inputEnvType != "<select>") || (env.inputnameSpace != "<select>")){
-          echo "Env is selected ${env.inputEnvType} && in ${env.inputnameSpace} - Namespace"
+          echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
           runthistage(props)
           //runDevDeployStages(Props)
           }
