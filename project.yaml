@@ -1,5 +1,5 @@
 #USER ---------------------------------------------------
-ldapGroup: dev-ops-admin,admin
+ldapApprovalGroup: dev-ops-admin,admin
 
 #Deploy--------------------------------------------------------
 
