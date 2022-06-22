@@ -3,9 +3,9 @@ ldapApprovalGroup: dev-ops-admin,admin
 
 #Deploy--------------------------------------------------------
 
-approvalTimeout: 5
+approvalTimeout: 15
 approvalTimeoutUnit: 'MINUTES'
-abortReasonTimeout: 3
+abortReasonTimeout: 10
 abortReasonTimeoutUnit: 'MINUTES'
 
 #DeployApproval--------------------------------------------------------
