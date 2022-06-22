@@ -1,0 +1,6 @@
+baseImageName:
+ service1: 'base_image85:2.4.5'
+ service2: 'baseimg:1.0.5'
+ One: 'working:tag'
+ Two: 'second_tag'
+ three: 'thired:tag' 
