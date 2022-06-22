@@ -18,7 +18,7 @@ def runPipeline(props){// Deployment start
         isInputlist = env.inputServiceList
         } 
 
-    if ((env.inputEnvType == "<select>") || (env.inputSrcType == "<select>")||(env.inputnameSpace == "<select>") && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
+    if ((env.inputEnvType == "<select>") || (env.inputSrcType == "<select>")||(env.inputnameSpace == "<select>") && (!props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
       error "You are not allowed to run deployment in this environments, Pls check with support-Team"
     }
 
