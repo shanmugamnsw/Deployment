@@ -83,7 +83,7 @@ def runPipeline(props){// Deployment start
     stage("Awaiting Approval"){
       try {
         timeout(time: props.approvalTimeout, unit: props.approvalTimeoutUnit){
-          userInput = input(id: 'userInput', message: "Are you Going to Proceed with this deployment in ${env.inputEnvType}-Envenvironment? along with ${env.inputServiceList}", ok: 'Deploy', submitter: props.ldapApprovalGroup)
+          userInput = input(id: 'userInput', message: "Are you Going to Proceed with this deployment in ${env.inputEnvType}-Envenvironment? along with this Service-List ${env.inputServiceList}", ok: 'Deploy', submitter: props.ldapApprovalGroup)
         }
         deployApproved = true
         didTimeout = false
