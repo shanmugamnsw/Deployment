@@ -9,7 +9,7 @@ def validInput(){
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-   Running BUILD PIPELINE
+                PIPELINE Main Function
   --------------------------------------------------------------------------------------------------------------------*/
 def runPipeline(props){// Deployment start
        if (validInput()){
@@ -17,10 +17,6 @@ def runPipeline(props){// Deployment start
         isProduction = env.inputEnvType.equalsIgnoreCase('PROD')
         isInputlist = env.inputServiceList
         } 
-
-    //if ((env.inputEnvType == "<select>") || (env.inputSrcType == "<select>")|| (env.inputnameSpace == "<select>") && (! props.ldapApprovalGroup.contains.getUserId())){
-     // error "You are not allowed to run deployment in this environments, Pls check with support-Team"
-    //}
 
     //if(env.inputEnvType.startsWith("STG") || (env.inputEnvType.startsWith("PROD") && (env.inputEnvSpace == "<select>"))){
        if((env.inputEnvType == "<select>") || (env.inputSrcType == "<select>")||(env.inputnameSpace == "<select>")){
@@ -48,6 +44,12 @@ def runPipeline(props){// Deployment start
 
          }
 } 
+
+/*----------------------------------------------------------------------------------------------------------------------
+   DEPLOY FUNCTIONS
+  --------------------------------------------------------------------------------------------------------------------*/
+
+
  def runDevDeployStages(SelectList){
 
             echo "Deploying this service ${SelectList} ............. "
@@ -69,9 +71,6 @@ def runPipeline(props){// Deployment start
               }
  }
 
-               // echo "sed -i 's!DYNAMIC_IMAGE!(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)!g'"
-                //echo "sed 's|DYNAMIC_IMAGE|'\$(cat IMG.txt)'|g'"
-                //sed "s|DYNAMIC_IMAGE| '\$TAG' |g" values.yaml
  /*------------------------------------------------------------------------------------------------------------------------
         Approval- Stage
   -------------------------------------------------------------------------------------------------------------------------*/
@@ -83,7 +82,7 @@ def runPipeline(props){// Deployment start
     stage("Awaiting Approval"){
       try {
         timeout(time: props.approvalTimeout, unit: props.approvalTimeoutUnit){
-          userInput = input(id: 'userInput', message: "Are you Going to Proceed with this deployment in ${env.inputEnvType}-Envenvironment? along with this Service-List ${env.inputServiceList}", ok: 'Deploy', submitter: props.ldapApprovalGroup)
+          userInput = input(id: 'userInput', message: "Are you Going to Proceed with this deployment in ${env.inputEnvType}-Envenvironment? along with ${env.inputServiceList}", ok: 'Deploy', submitter: props.ldapApprovalGroup)
         }
         deployApproved = true
         didTimeout = false
@@ -112,31 +111,10 @@ echo " Deployment in Staarted with approved..."
 } else if (deployApproved == false && didTimeout == true){
 stage (" approval not given")
 echo "deployment is failed "
+error "Deployment is failed"
 }
 }
 //================================================================
 
-
-
-
-/*----------------------------------------------------------------------------------------------------------------------
-   DEPLOY FUNCTIONS
-  --------------------------------------------------------------------------------------------------------------------*/
-def runDevDeployStages1(props){
-  inputServiceListSplit=env.inputServiceList.tokenize(",");
-  for (list = 0; earNumber < inputServiceListSplit.size(); list++){
-    currentSrcName = inputServiceListSplit[serName]
-    serName = currentSrcName.tokenize(":")[0]
-//    runConfigMapStages(props, currentEnv, earName)
- //   if (env.inputActivity == "ConfigMap"){
-  //    deletePodsForRegeneration(props, currentEnv, earName)
-   //   continue
-   // }
-    echo ${serName}
-    //runDeployScripts(props, currentEnv)
-    //stopOlderPods(props, currentEnv, earName)
-    //runUATTestStages(props, currentEnv)
-  }
-}
 return this;
 
