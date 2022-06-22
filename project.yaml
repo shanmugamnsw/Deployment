@@ -1,0 +1,12 @@
+#Deploy--------------------------------------------------------
+
+approvalTimeout: 5
+approvalTimeoutUnit: 'MINUTES'
+abortReasonTimeout: 3
+abortReasonTimeoutUnit: 'MINUTES'
+
+#DeployApproval--------------------------------------------------------
+AdGroup: sony
+emailApprovalRecipients:  shanmugam.nsw@gmail.com
+emailOutageRecipients: shanmugam.nsw@gmail.com
+
