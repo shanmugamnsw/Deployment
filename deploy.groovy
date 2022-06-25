@@ -59,6 +59,9 @@ def runPipeline(props){// Deployment start
                 sh """#!/bin/bash +e
                 cd Deployment
                 ls
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                cat KUBECONFIG
+                }
                 kubectl get pod -n kube-system --kubeconfig=config
                 kubectl get pod -n ${env.inputnameSpace} --kubeconfig=config
                 echo " DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
