@@ -59,6 +59,7 @@ def runPipeline(props){// Deployment start
                 sh """#!/bin/bash +e
                 cd Deployment
                 ls
+                kubectl get pod -n kube-system
                 echo " DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
                 echo "\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)" > IMG.txt
                 TAG=\$(cat IMG.txt)
