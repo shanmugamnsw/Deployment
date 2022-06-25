@@ -57,7 +57,10 @@ def runPipeline(props){// Deployment start
           //  echo " If required pip install shyaml"
               stage("Regenerating Dynnamic_Values"){
                 sh """#!/bin/bash +e
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                 cd Deployment
+                cat $KUBECONFIG > config
+                kubectl config set-context $KUBECONFIG --namespace=sony
                 echo " DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
                 echo "\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)" > IMG.txt
                 TAG=\$(cat IMG.txt)
@@ -66,7 +69,8 @@ def runPipeline(props){// Deployment start
                 echo "sed -i 's|DYNAMIC_IMAGE|'\$TAG'|g' values.yaml"
                 pwd
                 sed -i "s|DYNAMIC_TAG| '\$TAG' |g" values.yaml 
-                helm template .  
+                helm template .
+                }
                 """
               }
  }
