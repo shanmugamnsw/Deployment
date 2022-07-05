@@ -1,6 +1,6 @@
 import java.text.SimpleDateFormat
 import com.cloudbees.groovy.cps.NonCPS
-//@NonCPS
+@NonCPS
 /*--------------------------------------------------------------------------------------------------------------
               valid
 ---------------------------------------------------------------------------------------------------------------*/
@@ -146,6 +146,11 @@ def runDevDeployStages1(props){
 @NonCPS
 def getUsername(Throwable e){
   return e.getCauses()[0].getUser()
+}
+@NonCPS
+def isStartedByTimer() {
+    def buildCauses = currentBuild.rawBuild.getCauses()
+    println buildCauses
 }
 
 return this;
