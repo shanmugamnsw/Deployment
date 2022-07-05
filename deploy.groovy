@@ -147,12 +147,4 @@ def runDevDeployStages1(props){
   }
 }
 
-
-@NonCPS
-def getUsername(Throwable e){
-  return e.getCauses()[0].getUser()
-}
-
-
-
 return this;
