@@ -24,11 +24,6 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-        if((env.inputEnvType == "STG") && (! props.ldapApprovalGroup.contains)){
-          echo "Env is ${env.inputEnvType}"
-          error "Your not allowed run this deployment"
-       }
-
 //        if (!isStartedByTimer()){
       ///    if ((env.inputEnvType != 'PROD') && (! props.ldapApprovalGroup.contains)){
         //    error "You are not allowed to run deployment in Non-DEV environments."
