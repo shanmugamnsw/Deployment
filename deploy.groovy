@@ -24,10 +24,16 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-        if((env.inputEnvType == "STG") && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
+     //   if((env.inputEnvType == "STG") && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
           //echo "Env is ${env.inputEnvType}"
-           error "Your not allowed run this deployment"
-       }
+   //        error "Your not allowed run this deployment"
+ //      }
+
+        if (!isStartedByTimer()){
+          if ((env.inputEnvType != 'PROD') && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
+            error "You are not allowed to run deployment in Non-DEV environments."
+            }
+            }
 
          if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
@@ -147,5 +153,18 @@ def getUsername(Throwable e){
   return e.getCauses()[0].getUser()
 }
 
+@NonCPS
+def isStartedByTimer() {
+    def buildCauses = currentBuild.rawBuild.getCauses()
+    println buildCauses
+
+    boolean isStartedByTimer = false
+    for (buildCause in buildCauses) {
+        if ("${buildCause}".contains("hudson.triggers.TimerTrigger\$TimerTriggerCause")) {
+            isStartedByTimer = true
+        }
+    }
+    return isStartedByTimer
+}
 
 return this;
