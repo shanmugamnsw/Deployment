@@ -24,13 +24,14 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-        if((env.inputEnvType != "PROD") && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
+        if((env.inputEnvType == "STG") && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
           //echo "Env is ${env.inputEnvType}"
            error "Your not allowed run this deployment"
        }
 
          if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
+           echo "$(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId())"
             runthistage(props)
        //     runDevDeployStages(Props)
          }
@@ -149,4 +150,3 @@ def getUsername(Throwable e){
 
 
 return this;
-
