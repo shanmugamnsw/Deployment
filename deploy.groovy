@@ -24,7 +24,7 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-       if((env.inputEnvType != "<select>") || (env.inputSrcType != "<select>")||(env.inputnameSpace != "<select>") && (props.ldapApprovalGroup.contains)){
+       if((env.inputEnvType != "<select>") || (env.inputSrcType != "<select>")||(env.inputnameSpace != "<select>") ){
            error "Your not allowed run this deployment"
        }
 
@@ -37,6 +37,7 @@ def runPipeline(props){// Deployment start
          if((env.inputEnvType != "PROD") || (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
           runthistage(props)
+          println "$(props.ldapApprovalGroup.contains)"
           //runDevDeployStages(Props)
           }
             echo "Listed total Input-services is ${env.inputServiceList}"
