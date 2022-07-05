@@ -24,8 +24,7 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-        if((env.inputEnvType != "<select>") || (env.inputSrcType != "<select>")||(env.inputnameSpace != "<select>") && (props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
-          //echo "Env is ${env.inputEnvType}"
+       if((env.inputEnvType != "<select>") || (env.inputSrcType != "<select>")||(env.inputnameSpace != "<select>") && (props.ldapApprovalGroup.contains)){
            error "Your not allowed run this deployment"
        }
 
