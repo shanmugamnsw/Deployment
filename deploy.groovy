@@ -140,5 +140,13 @@ def runDevDeployStages1(props){
     //runUATTestStages(props, currentEnv)
   }
 }
+
+
+
+@NonCPS
+def getUsername(Throwable e){
+  return e.getCauses()[0].getUser()
+}
+
 return this;
 
