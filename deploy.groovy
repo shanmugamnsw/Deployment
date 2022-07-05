@@ -30,7 +30,7 @@ def runPipeline(props){// Deployment start
  //      }
 
         if (!isStartedByTimer()){
-          if ((env.inputEnvType != 'PROD') && (! props.ldapApprovalGroup.contains(Cause.UserIdCause).getUserId())){
+          if ((env.inputEnvType != 'PROD') && (! props.ldapApprovalGroup.contains)){
             error "You are not allowed to run deployment in Non-DEV environments."
             }
             }
