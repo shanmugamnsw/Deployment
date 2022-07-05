@@ -9,7 +9,7 @@ abortReasonTimeout: 10
 abortReasonTimeoutUnit: 'MINUTES'
 
 #DeployApproval--------------------------------------------------------
-AdGroup: sony
+ldapApprovalGroup: sony
 emailApprovalRecipients:  shanmugam.nsw@gmail.com
 emailOutageRecipients: shanmugam.nsw@gmail.com
 
