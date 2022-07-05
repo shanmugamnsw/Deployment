@@ -25,7 +25,7 @@ def runPipeline(props){// Deployment start
        }
 
         if((env.inputEnvType == "STG") && (! props.ldapApprovalGroup.contains)){
-          //echo "Env is ${env.inputEnvType}"
+          echo "Env is ${env.inputEnvType}"
           error "Your not allowed run this deployment"
        }
 
@@ -153,18 +153,6 @@ def getUsername(Throwable e){
   return e.getCauses()[0].getUser()
 }
 
-@NonCPS
-def isStartedByTimer() {
-    def buildCauses = currentBuild.rawBuild.getCauses()
-    println buildCauses
 
-    boolean isStartedByTimer = false
-    for (buildCause in buildCauses) {
-        if ("${buildCause}".contains("hudson.triggers.TimerTrigger\$TimerTriggerCause")) {
-            isStartedByTimer = true
-        }
-    }
-    return isStartedByTimer
-}
 
 return this;
