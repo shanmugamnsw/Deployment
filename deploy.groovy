@@ -31,7 +31,6 @@ def runPipeline(props){// Deployment start
 
          if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
-           echo "$(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId())"
             runthistage(props)
        //     runDevDeployStages(Props)
          }
