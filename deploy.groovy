@@ -9,7 +9,7 @@ def validInput(){
 }
 
 /*----------------------------------------------------------------------------------------------------------------------
-                PIPELINE Main Function
+    PIPELINE Main Function
   --------------------------------------------------------------------------------------------------------------------*/
 def runPipeline(props){// Deployment start
        if (validInput()){
@@ -22,6 +22,11 @@ def runPipeline(props){// Deployment start
        if((env.inputEnvType == "<select>") || (env.inputSrcType == "<select>")||(env.inputnameSpace == "<select>")){
           //echo "Env is ${env.inputEnvType}"
            error "Pls provide valid input"
+       }
+
+        if((env.inputEnvType == "<select>") || (env.inputSrcType == "<select>")||(env.inputnameSpace == "<select>") && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
+          //echo "Env is ${env.inputEnvType}"
+           error "Your not allowed run this deployment"
        }
 
          if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
@@ -44,12 +49,6 @@ def runPipeline(props){// Deployment start
 
          }
 } 
-
-/*----------------------------------------------------------------------------------------------------------------------
-   DEPLOY FUNCTIONS
-  --------------------------------------------------------------------------------------------------------------------*/
-
-
  def runDevDeployStages(SelectList){
 
             echo "Deploying this service ${SelectList} ............. "
@@ -58,9 +57,6 @@ def runPipeline(props){// Deployment start
               stage("Regenerating Dynnamic_Values"){
                 sh """#!/bin/bash +e
                 cd Deployment
-                ls
-                kubectl get pod -n kube-system --kubeconfig=config
-                kubectl get pod -n ${env.inputnameSpace} --kubeconfig=config
                 echo " DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
                 echo "\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)" > IMG.txt
                 TAG=\$(cat IMG.txt)
@@ -74,6 +70,9 @@ def runPipeline(props){// Deployment start
               }
  }
 
+               // echo "sed -i 's!DYNAMIC_IMAGE!(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)!g'"
+                //echo "sed 's|DYNAMIC_IMAGE|'\$(cat IMG.txt)'|g'"
+                //sed "s|DYNAMIC_IMAGE| '\$TAG' |g" values.yaml
  /*------------------------------------------------------------------------------------------------------------------------
         Approval- Stage
   -------------------------------------------------------------------------------------------------------------------------*/
@@ -119,5 +118,27 @@ error "Deployment is failed"
 }
 //================================================================
 
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------
+   DEPLOY FUNCTIONS
+  --------------------------------------------------------------------------------------------------------------------*/
+def runDevDeployStages1(props){
+  inputServiceListSplit=env.inputServiceList.tokenize(",");
+  for (list = 0; earNumber < inputServiceListSplit.size(); list++){
+    currentSrcName = inputServiceListSplit[serName]
+    serName = currentSrcName.tokenize(":")[0]
+//    runConfigMapStages(props, currentEnv, earName)
+ //   if (env.inputActivity == "ConfigMap"){
+  //    deletePodsForRegeneration(props, currentEnv, earName)
+   //   continue
+   // }
+    echo ${serName}
+    //runDeployScripts(props, currentEnv)
+    //stopOlderPods(props, currentEnv, earName)
+    //runUATTestStages(props, currentEnv)
+  }
+}
 return this;
 
