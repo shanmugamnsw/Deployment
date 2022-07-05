@@ -24,16 +24,16 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-     //   if((env.inputEnvType == "STG") && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
+        if((env.inputEnvType == "STG") && (! props.ldapApprovalGroup.contains)){
           //echo "Env is ${env.inputEnvType}"
-   //        error "Your not allowed run this deployment"
- //      }
+          error "Your not allowed run this deployment"
+       }
 
-        if (!isStartedByTimer()){
-          if ((env.inputEnvType != 'PROD') && (! props.ldapApprovalGroup.contains)){
-            error "You are not allowed to run deployment in Non-DEV environments."
-            }
-            }
+//        if (!isStartedByTimer()){
+      ///    if ((env.inputEnvType != 'PROD') && (! props.ldapApprovalGroup.contains)){
+        //    error "You are not allowed to run deployment in Non-DEV environments."
+         //   }
+          //  }
 
          if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
