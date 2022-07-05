@@ -24,7 +24,8 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-       if((env.inputEnvType != "<select>") || (env.inputSrcType != "<select>")||(env.inputnameSpace != "<select>") ){
+        if((env.inputEnvType != "<select>") || (env.inputSrcType != "<select>")||(env.inputnameSpace != "<select>") && (! props.ldapApprovalGroup.contains)){
+          //echo "Env is ${env.inputEnvType}"
            error "Your not allowed run this deployment"
        }
 
@@ -37,7 +38,6 @@ def runPipeline(props){// Deployment start
          if((env.inputEnvType != "PROD") || (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
           runthistage(props)
-          println "$(props.ldapApprovalGroup.contains)"
           //runDevDeployStages(Props)
           }
             echo "Listed total Input-services is ${env.inputServiceList}"
@@ -142,16 +142,11 @@ def runDevDeployStages1(props){
 }
 
 
-
 @NonCPS
 def getUsername(Throwable e){
   return e.getCauses()[0].getUser()
 }
-@NonCPS
-def isStartedByTimer() {
-    def buildCauses = currentBuild.rawBuild.getCauses()
-    println buildCauses
-}
+
 
 return this;
 
