@@ -32,13 +32,13 @@ def runPipeline(props){// Deployment start
 
          if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
-            runthistage(props)
+          //  runthistage(props)
        //     runDevDeployStages(Props)
          }
          
          if((env.inputEnvType != "PROD") || (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
-          runthistage(props)
+         // runthistage(props)
           //runDevDeployStages(Props)
           }
             echo "Listed total Input-services is ${env.inputServiceList}"
@@ -58,7 +58,11 @@ def runPipeline(props){// Deployment start
               stage("Regenerating Dynnamic_Values"){
                 sh """#!/bin/bash +e
                 cd Deployment
-                echo " DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
+                echo "DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
+                DOCKER_TAG=$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)
+                echo DOCKER_TAG $DOCKER_TAG
+                sed -e "s|DYNAMIC_TAG|$DOCKER_TAG|g" values.yaml > $SelectList-values.yaml
+                cat $SelectList-values.yaml
                 echo "\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)" > IMG.txt
                 TAG=\$(cat IMG.txt)
                 echo \$TAG
