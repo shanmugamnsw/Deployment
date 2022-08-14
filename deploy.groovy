@@ -61,9 +61,21 @@ def runPipeline(props){// Deployment start
                 pwd
                 echo "DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
                 DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)
+                CPUMAX=\$(cat changeover.yaml | shyaml get-value cpuMax.$SelectList)
+                CPUMIN=\$(cat changeover.yaml | shyaml get-value cpuMin.$SelectList)
+                MEMORYMAX=\$(cat changeover.yaml | shyaml get-value memoryMax.$SelectList)
+                MEMORYMIN=\$(cat changeover.yaml | shyaml get-value memoryMin.$SelectList)
                 echo DOCKER_TAG is "\$DOCKER_TAG"
+                echo MemoryMax "\$MEMORYMAX
+                echo MemoryMin "\$MEMORYMIN
+                echo CpuMin "\$CPUMIN"
+                echo CpuMax "\$CPUMAX"
                 cd $SelectList
-                sed -e "s|DYNAMIC_TAG|\$DOCKER_TAG|g" values.yaml > $SelectList-values.yaml
+                sed -e "s|DYNAMIC_TAG|\$DOCKER_TAG|g" values.yaml >> $SelectList-values.yaml
+                sed -e "s|DYNAMIC_MEMORYMAX|\$MEMORYMAX|g" values.yaml >> $SelectList-values.yaml
+                sed -e "s|DYNAMIC_MEMORYMIN|\$MEMORYMIN|g" values.yaml >> $SelectList-values.yaml
+                sed -e "s|DYNAMIC_CPUMAX|\$CPUMAX|g" values.yaml >> $SelectList-values.yaml
+                sed -e "s|DYNAMIC_CPUMIN|\$CPUMIN|g" values.yaml >> $SelectList-values.yaml
                 cat $SelectList-values.yaml
                 """
               }
