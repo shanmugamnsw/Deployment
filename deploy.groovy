@@ -59,11 +59,13 @@ def runPipeline(props){// Deployment start
                 sh """#!/bin/bash +e
                 cd Deployment
                 echo " DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
+                DOCKER_TAG=$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)
+                echo $DOCKER_TAG
                 echo "\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)" > IMG.txt
                 TAG=\$(cat IMG.txt)
                 echo \$TAG
                 cd $SelectList
-                echo "sed -i 's|DYNAMIC_IMAGE|'\$TAG'|g' values.yaml"
+                echo "sed -i 's|DYNAMIC_TAG|'$DOCKER_TAG'|g' values.yaml"
                 pwd
                 sed -i "s|DYNAMIC_TAG| '\$TAG' |g" values.yaml 
                 helm template .  
