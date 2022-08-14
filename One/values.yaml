@@ -6,4 +6,11 @@ image:
   repository:  DYNAMIC_TAG 
   pullSecret: regsecret
   #pullPolicy: Never
-resources: {}
+resources: 
+ limits:
+  cpu: DYNAMIC_CPUMAX
+  memory: DYNAMIC_MEMORYMAX
+ request:
+   cpu: DYNAMIC_CPUMIN
+  memory: DYNAMIC_MEMORYMIN
+  
