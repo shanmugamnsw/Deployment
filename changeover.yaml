@@ -3,4 +3,24 @@ baseImageName:
  service2: 'baseimg:1.0.5'
  One: 'superman:tag'
  Two: 'batman:tag'
- three: 'spiderman:tag' 
+ three: 'spiderman:tag'
+ 
+cpuMin:
+ One: 200m
+ Two: 300m
+ three: 400m
+ 
+cpuMax:
+ One: 400m
+ Two: 500m
+ three: 600m
+
+memoryMin:
+ One: 200Mi
+ Two: 300Mi
+ three: 400Mi
+ 
+memoryMax:
+ One: 400Mi
+ Two: 500Mi
+ three: 600Mi
