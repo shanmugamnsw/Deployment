@@ -59,12 +59,12 @@ def runPipeline(props){// Deployment start
                 sh """#!/bin/bash +e
                 cd Deployment
                 pwd
-                echo "DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName."$SelectList")"
-                DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName."$SelectList")
+                echo "DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)"
+                DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName.$SelectList)
                 echo DOCKER_TAG "\$DOCKER_TAG"
                 cd $SelectList
-                sed -e 's|DYNAMIC_TAG|"\$DOCKER_TAG"|g' values.yaml > "$SelectList"-values.yaml
-                cat "$SelectList"-values.yaml
+                sed -e 's|DYNAMIC_TAG|"\$DOCKER_TAG"|g' values.yaml > $SelectList-values.yaml
+                cat $SelectList-values.yaml
                 """
               }
  }
