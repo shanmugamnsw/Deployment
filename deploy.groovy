@@ -71,12 +71,12 @@ def runPipeline(props){// Deployment start
                 echo CpuMin "\$CPUMIN"
                 echo CpuMax "\$CPUMAX"
                 cd $SelectList
-                sed -e "s|DYNAMIC_TAG|\$DOCKER_TAG|g" values.yaml >> $SelectList-values.yaml
-                sed -e "s|DYNAMIC_MEMORYMAX|\$MEMORYMAX|g" values.yaml >> $SelectList-values.yaml
-                sed -e "s|DYNAMIC_MEMORYMIN|\$MEMORYMIN|g" values.yaml >> $SelectList-values.yaml
-                sed -e "s|DYNAMIC_CPUMAX|\$CPUMAX|g" values.yaml >> $SelectList-values.yaml
-                sed -e "s|DYNAMIC_CPUMIN|\$CPUMIN|g" values.yaml >> $SelectList-values.yaml
-                cat $SelectList-values.yaml
+                sed -i "s|DYNAMIC_TAG|\$DOCKER_TAG|g" values.yaml
+                sed -i "s|DYNAMIC_MEMORYMAX|\$MEMORYMAX|g" values.yaml
+                sed -i "s|DYNAMIC_MEMORYMIN|\$MEMORYMIN|g" values.yaml
+                sed -i "s|DYNAMIC_CPUMAX|\$CPUMAX|g" values.yaml
+                sed -i "s|DYNAMIC_CPUMIN|\$CPUMIN|g" values.yaml
+                cat values.yaml
                 """
               }
  }
