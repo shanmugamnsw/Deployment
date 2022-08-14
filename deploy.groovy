@@ -65,11 +65,14 @@ def runPipeline(props){// Deployment start
                 CPUMIN=\$(cat changeover.yaml | shyaml get-value cpuMin.$SelectList)
                 MEMORYMAX=\$(cat changeover.yaml | shyaml get-value memoryMax.$SelectList)
                 MEMORYMIN=\$(cat changeover.yaml | shyaml get-value memoryMin.$SelectList)
+                echo "===================================="
+                echo "$SelectList"
                 echo DOCKER_TAG is "\$DOCKER_TAG"
                 echo MemoryMax "\$MEMORYMAX"
                 echo MemoryMin "\$MEMORYMIN"
                 echo CpuMin "\$CPUMIN"
                 echo CpuMax "\$CPUMAX"
+                echo "===================================="
                 cd $SelectList
                 sed -i "s|DYNAMIC_TAG|\$DOCKER_TAG|g" values.yaml
                 sed -i "s|DYNAMIC_MEMORYMAX|\$MEMORYMAX|g" values.yaml
@@ -77,6 +80,7 @@ def runPipeline(props){// Deployment start
                 sed -i "s|DYNAMIC_CPUMAX|\$CPUMAX|g" values.yaml
                 sed -i "s|DYNAMIC_CPUMIN|\$CPUMIN|g" values.yaml
                 cat values.yaml
+                helm template . */
                 """
               }
  }
