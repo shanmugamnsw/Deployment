@@ -56,16 +56,16 @@ def runPipeline(props){// Deployment start
           //  echo "kubectl deploy ${SelectList}"
           //  echo " If required pip install shyaml"
               stage("Regenerating Dynnamic_Values"){
-                sh '''#!/bin/bash +e
+                sh """#!/bin/bash +e
                 cd Deployment
                 pwd
-                echo "DOCKER_TAG=$(cat changeover.yaml | shyaml get-value baseImageName."$SelectList")"
-                DOCKER_TAG=$(cat changeover.yaml | shyaml get-value baseImageName."$SelectList")
-                echo DOCKER_TAG "$DOCKER_TAG"
+                echo "DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName."$SelectList")"
+                DOCKER_TAG=\$(cat changeover.yaml | shyaml get-value baseImageName."$SelectList")
+                echo DOCKER_TAG "\$DOCKER_TAG"
                 cd $SelectList
-                sed -e 's|DYNAMIC_TAG|"$DOCKER_TAG"|g' values.yaml > "$SelectList"-values.yaml
+                sed -e 's|DYNAMIC_TAG|"\$DOCKER_TAG"|g' values.yaml > "$SelectList"-values.yaml
                 cat "$SelectList"-values.yaml
-                '''
+                """
               }
  }
 
