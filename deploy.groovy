@@ -66,8 +66,8 @@ def runPipeline(props){// Deployment start
                 MEMORYMAX=\$(cat changeover.yaml | shyaml get-value memoryMax.$SelectList)
                 MEMORYMIN=\$(cat changeover.yaml | shyaml get-value memoryMin.$SelectList)
                 echo DOCKER_TAG is "\$DOCKER_TAG"
-                echo MemoryMax "\$MEMORYMAX
-                echo MemoryMin "\$MEMORYMIN
+                echo MemoryMax "\$MEMORYMAX"
+                echo MemoryMin "\$MEMORYMIN"
                 echo CpuMin "\$CPUMIN"
                 echo CpuMax "\$CPUMAX"
                 cd $SelectList
