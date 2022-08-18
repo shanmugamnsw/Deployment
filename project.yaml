@@ -1,5 +1,5 @@
 #USER ---------------------------------------------------
-ldapApprovalGroup: sony,test,admin
+ldapApprovalGroup: 'sony','test','admin'
 
 #Deploy--------------------------------------------------------
 
