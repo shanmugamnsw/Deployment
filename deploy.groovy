@@ -16,10 +16,11 @@ def runPipeline(props){// Deployment start
        echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"
        lisTUser = props.ldapApprovalGroup
        echo "lisTUser $lisTUser"
-       if(($BUILD_TRIGGER_BY) in ($lisTUser)) ; then
-          echo yes
+       if [[ $BUILD_TRIGGER_BY == $lisTUser ]]
+       then
+       echo "It's there!";
        else
-          echo no
+       echo "It's not there!";
        fi
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
