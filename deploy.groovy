@@ -21,6 +21,9 @@ def runPipeline(props){// Deployment start
        str = str.toLowerCase()
        if( str in list ){
        println "found" 
+         echo "found'
+         else
+           echo "Not found"
       }
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
