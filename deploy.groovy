@@ -16,11 +16,7 @@ def runPipeline(props){// Deployment start
        echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"
        lisTUser = props.ldapApprovalGroup
        echo "lisTUser $lisTUser"
-       if $BUILD_TRIGGER_BY in $lisTUser ; then
-       echo yes
-      else
-        echo no
-       fi
+       echo "if $BUILD_TRIGGER_BY in $lisTUser ; then"
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
         isProduction = env.inputEnvType.equalsIgnoreCase('PROD')
