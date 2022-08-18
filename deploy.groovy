@@ -12,6 +12,8 @@ def validInput(){
     PIPELINE Main Function
   --------------------------------------------------------------------------------------------------------------------*/
 def runPipeline(props){// Deployment start
+       BUILD_TRIGGER_BY = "${currentBuild.getBuildCauses()[0].shortDescription} / ${currentBuild.getBuildCauses()[0].userId}"
+       echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
         isProduction = env.inputEnvType.equalsIgnoreCase('PROD')
