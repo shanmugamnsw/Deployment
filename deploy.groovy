@@ -53,7 +53,7 @@ def runPipeline(props){// Deployment start
  def runDevDeployStages(SelectList){
 
             echo "Deploying this service ${SelectList} ............. "
-             lisTUser=(props.ldapApprovalGroup.contains)
+             lisTUser = props.ldapApprovalGroup
              echo "lisTUser $lisTUser"
           //  echo "kubectl deploy ${SelectList}"
           //  echo " If required pip install shyaml"
