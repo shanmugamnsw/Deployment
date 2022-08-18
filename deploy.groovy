@@ -16,14 +16,12 @@ def runPipeline(props){// Deployment start
        echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"
        lisTUser = props.ldapApprovalGroup
        echo "lisTUser $lisTUser"
-       def str = '$lisTUser'
-       def list = ['${BUILD_TRIGGER_BY}']
-       str = str.toLowerCase()
-  if( list.find{e-> e.equalsIgnoreCase(str)} ){
-    println "found"
-  }else
-  println "Not-found"
-  error " Your are not allowed to run this job"
+if [[ "$lisTUser" == *"${BUILD_TRIGGER_BY}"* ]]; then
+  echo "It's there."
+  else
+          echo "not there"
+   error " Your are not allowed to run this job"
+fi
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
         isProduction = env.inputEnvType.equalsIgnoreCase('PROD')
