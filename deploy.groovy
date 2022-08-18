@@ -14,6 +14,13 @@ def validInput(){
 def runPipeline(props){// Deployment start
        BUILD_TRIGGER_BY = "${currentBuild.getBuildCauses()[0].userId}"
        echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"
+       lisTUser = props.ldapApprovalGroup
+       echo "lisTUser $lisTUser"
+       if "${BUILD_TRIGGER_BY}" in $lisTUser ; then
+       echo yes
+      else
+        echo no
+       fi
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
         isProduction = env.inputEnvType.equalsIgnoreCase('PROD')
