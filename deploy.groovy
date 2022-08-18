@@ -19,9 +19,9 @@ def runPipeline(props){// Deployment start
        def str = '$lisTUser'
        def list = ['${BUILD_TRIGGER_BY}']
        str = str.toLowerCase()
-if( list in str ){
+  if( list.find{e-> e.equalsIgnoreCase(str)} ){
     println "found"
-}else
+  }else
   println "Not-found"
   error " Your are not allowed to run this job"
        if (validInput()){
