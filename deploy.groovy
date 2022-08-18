@@ -21,7 +21,7 @@ def runPipeline(props){// Deployment start
        str = str.toLowerCase()
        if( str in list ){
        println "found" 
-         echo "found'
+         echo "found"
          else
            echo "Not found"
       }
