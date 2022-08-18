@@ -19,11 +19,10 @@ def runPipeline(props){// Deployment start
        def str = '$lisTUser'
        def list = ['${BUILD_TRIGGER_BY}']
        str = str.toLowerCase()
-if [[ str in list ]]; then
-    echo "WORD is in the list"
-else
-    echo "WORD is not in the list"
-fi
+if( str in list ){
+    println "found"
+}else
+  println "Not-found"
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
         isProduction = env.inputEnvType.equalsIgnoreCase('PROD')
