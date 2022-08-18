@@ -19,10 +19,11 @@ def runPipeline(props){// Deployment start
        def str = '$lisTUser'
        def list = ['${BUILD_TRIGGER_BY}']
        str = str.toLowerCase()
-if( $lisTUser in $BUILD_TRIGGER_BY ){
+if( str in list ){
     println "found"
 }else
   println "Not-found"
+  error " Your are not allowed to run this job"
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
         isProduction = env.inputEnvType.equalsIgnoreCase('PROD')
