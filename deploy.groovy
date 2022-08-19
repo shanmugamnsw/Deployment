@@ -20,6 +20,7 @@ def runPipeline(props){// Deployment start
   echo "It's there."
   } else {
     echo "It's not there"
+    allow = False
   }
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
@@ -34,7 +35,7 @@ def runPipeline(props){// Deployment start
        }
 
 //        if (!isStartedByTimer())
-      if ((env.inputEnvType != 'PROD') && (env.inputEnvType != 'STG') && (props.ldapApprovalGroup.contains("${currentBuild.getBuildCauses()[0].userId}"))){
+      if ((env.inputEnvType != 'PROD') && (env.inputEnvType != 'STG') && (allow == 'False'){
             error "You are not allowed to run deployment in Non-DEV environments."
             }
           //  }
