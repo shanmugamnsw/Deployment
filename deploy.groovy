@@ -18,6 +18,8 @@ def runPipeline(props){// Deployment start
        echo "lisTUser $lisTUser"
   if ( "$lisTUser" == "${BUILD_TRIGGER_BY}" ){
   echo "It's there."
+  } else {
+    echo "It's not there"
   }
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
