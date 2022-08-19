@@ -35,7 +35,7 @@ def runPipeline(props){// Deployment start
        }
 
 //        if (!isStartedByTimer())
-      if ((env.inputEnvType != 'STG') && (allow != "true")){
+      if ((env.inputEnvType == 'STG') && (allow != "true")){
             error "You are not allowed to run deployment in Non-DEV environments."
             }
           //  }
