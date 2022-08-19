@@ -32,7 +32,7 @@ def runPipeline(props){// Deployment start
        }
 
 //        if (!isStartedByTimer()){
-      if ((env.inputEnvType != 'PROD') && (env.inputEnvType != 'STG') && (! props.ldapApprovalGroup.contains(currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()))){
+      if ((env.inputEnvType != 'PROD') && (env.inputEnvType != 'STG') && (!props.ldapApprovalGroup.contains(currentBuild.getBuildCauses()[0].userId))){
             error "You are not allowed to run deployment in Non-DEV environments."
             }
           //  }
@@ -53,7 +53,7 @@ def runPipeline(props){// Deployment start
             for (i = 0; i < envNamesSplit.size();i++) {
             SelectList = envNamesSplit[i]
                         // echo " Currently Deploying this ${envNamesSplit[i]} service in ${inputEnvType}-ENVIROMENT @ ${env.inputnameSpace}-NAMESPACE"
-                        runDevDeployStages(SelectList)
+                     //   runDevDeployStages(SelectList)
 
          }
 } 
