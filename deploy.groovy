@@ -20,7 +20,7 @@ def runPipeline(props){// Deployment start
   echo "It's there."
   } else {
     echo "It's not there"
-    allow = False
+    allow = false
   }
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
@@ -35,7 +35,7 @@ def runPipeline(props){// Deployment start
        }
 
 //        if (!isStartedByTimer())
-      if ((env.inputEnvType != 'PROD') && (env.inputEnvType != 'STG') && (allow == "False")){
+      if ((env.inputEnvType != 'PROD') && (env.inputEnvType != 'STG') && (allow == "false")){
             error "You are not allowed to run deployment in Non-DEV environments."
             }
           //  }
