@@ -15,6 +15,8 @@ def runPipeline(props){// Deployment start
        BUILD_TRIGGER_BY = "${currentBuild.getBuildCauses()[0].userId}"
        echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"
        lisTUser = props.ldapApprovalGroup
+       lisT = props.ldapApprovalGroup.contains
+       echo "liSt $lisT"
        echo "lisTUser $lisTUser"
   if ( "$lisTUser" == "${BUILD_TRIGGER_BY}" ){
   echo "It's there."
