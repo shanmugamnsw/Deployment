@@ -20,7 +20,7 @@ def runPipeline(props){// Deployment start
   echo "It's there."
   } else {
     echo "It's not there"
-    allow = false
+    allow = true
   }
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
