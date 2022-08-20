@@ -25,10 +25,11 @@ def runPipeline(props){// Deployment start
           //echo "Env is ${env.inputEnvType}"
            error "Pls provide valid input"
        }
-
+  stage("Authoring system"){
       if (((env.inputEnvType == 'STG') || (env.inputEnvType == 'PROD')) && (!props.ldapApprovalGroup.contains(currentBuild.getBuildCauses()[0].userId))){
             error "You are not allowed to run deployment in Non-DEV environments."
             }
+  }
 
          //if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
  //         echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
@@ -41,7 +42,9 @@ def runPipeline(props){// Deployment start
          // runthistage(props)
           //runDevDeployStages(Props)
           }
+  stage("Service-list Clollection"){
             echo "Listed total Input-services is ${env.inputServiceList}"
+  }
             envNamesSplit = env.inputServiceList.tokenize(",");
             for (i = 0; i < envNamesSplit.size();i++) {
             SelectList = envNamesSplit[i]
