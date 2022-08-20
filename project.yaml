@@ -14,4 +14,4 @@ emailApprovalRecipients:  shanmugam.nsw@gmail.com
 emailOutageRecipients: shanmugam.nsw@gmail.com
 
 #service---------------
-vault: apple,mango
+vault: apple,mango,two
