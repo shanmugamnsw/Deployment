@@ -56,7 +56,9 @@ def runPipeline(props){// Deployment start
 
 def runDevDeployStages22(SelectList){
   echo "Deploying this service ${SelectList} ............. "
-  if ((env.inputnameSpace == "vault") && (!props.vault.contains('${SelectList}'))){
+  lisT = props.vault
+  echo "List $lisT"
+  if ((env.inputnameSpace == "vault") && (!props.vault.contains(${SelectList}))){
     echo "Not allowed to run this service $SelectList in this ${env.inputnameSpace}"
   } else {
     echo "allowed to run this service $SelectList in this ${env.inputnameSpace}"
