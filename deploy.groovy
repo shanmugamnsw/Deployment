@@ -59,8 +59,8 @@ def serviceValidationStages(props){
   lisT = props.vault
   echo "List $lisT"
   if ((env.inputnameSpace == "vault") && (!props.vault.contains("${SelectList}"))){
-    echo "Your not allowed to run this service $SelectList in this namespace ${env.inputnameSpace}"
-    error "Your not allowed to run this service $SelectList in this namespace ${env.inputnameSpace}"
+    echo "Your not allowed to run this $SelectList service in this ${env.inputnameSpace} namespace "
+    error "Your not allowed to run this $SelectList service in this ${env.inputnameSpace} namespace"
   } else {
     echo "Allowed to run this service $SelectList in this ${env.inputnameSpace}"
   }
