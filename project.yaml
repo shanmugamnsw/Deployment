@@ -13,3 +13,5 @@ ApprovalGroup: sony,admi
 emailApprovalRecipients:  shanmugam.nsw@gmail.com
 emailOutageRecipients: shanmugam.nsw@gmail.com
 
+#service---------------
+vault: apple,mango
