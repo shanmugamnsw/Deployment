@@ -26,12 +26,9 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-      if ((env.inputEnvType == 'STG') && (!props.ldapApprovalGroup.contains(currentBuild.getBuildCauses()[0].userId))){
+      if ((env.inputEnvType == 'STG') || (env.inputEnvType == 'PROD') && (!props.ldapApprovalGroup.contains(currentBuild.getBuildCauses()[0].userId))){
             error "You are not allowed to run deployment in Non-DEV environments."
             }
-      if ((env.inputnameSpace == "vault") && (!props.vault.contains(env.inputServiceList))){
-        echo "Not allowed to run this service in this namespace"
-      }
 
          //if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
  //         echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
