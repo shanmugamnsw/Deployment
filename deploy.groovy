@@ -14,14 +14,6 @@ def validInput(){
 def runPipeline(props){// Deployment start
        BUILD_TRIGGER_BY = "${currentBuild.getBuildCauses()[0].userId}"
        echo "BUILD_TRIGGER_BY: ${BUILD_TRIGGER_BY}"
-       lisTUser = props.ldapApprovalGroup
-       echo "lisTUser $lisTUser"
-  if ( "$lisTUser" == "${BUILD_TRIGGER_BY}" ){
-  echo "It's there."
-  } else {
-    echo "It's not there"
-    allow = true
-  }
        if (validInput()){
         isStaging = env.inputEnvType.equalsIgnoreCase('STG')
         isProduction = env.inputEnvType.equalsIgnoreCase('PROD')
@@ -34,11 +26,12 @@ def runPipeline(props){// Deployment start
            error "Pls provide valid input"
        }
 
-//        if (!isStartedByTimer())
       if ((env.inputEnvType == 'STG') && (!props.ldapApprovalGroup.contains(currentBuild.getBuildCauses()[0].userId))){
             error "You are not allowed to run deployment in Non-DEV environments."
             }
-          //  }
+      if ((env.inputnameSpace == "vault") && (!props.vault.contains(env.inputServiceList))){
+        echo "Not allowed to run this service in this namespace"
+      }
 
          //if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
  //         echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
