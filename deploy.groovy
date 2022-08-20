@@ -29,7 +29,7 @@ def runPipeline(props){// Deployment start
         } 
 
     //if(env.inputEnvType.startsWith("STG") || (env.inputEnvType.startsWith("PROD") && (env.inputEnvSpace == "<select>"))){
-       if((env.inputEnvType == "<select>") || (env.inputSrcType == "<select>")||(env.inputnameSpace == "<select>")){
+       if ((env.inputEnvType == "<select>") || (env.inputSrcType == "<select>")||(env.inputnameSpace == "<select>")){
           //echo "Env is ${env.inputEnvType}"
            error "Pls provide valid input"
        }
@@ -40,13 +40,13 @@ def runPipeline(props){// Deployment start
             }
           //  }
 
-         if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
-          echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
+         //if ((env.inputEnvType == "PROD") && (env.inputnameSpace != "<select>")){
+ //         echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
           //  runthistage(props)
        //     runDevDeployStages(Props)
-         }
+   //      }
          
-         if((env.inputEnvType != "PROD") || (env.inputnameSpace != "<select>")){
+         if ((env.inputEnvType != "PROD") || (env.inputnameSpace != "<select>")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
          // runthistage(props)
           //runDevDeployStages(Props)
