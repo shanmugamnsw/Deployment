@@ -49,10 +49,21 @@ def runPipeline(props){// Deployment start
             for (i = 0; i < envNamesSplit.size();i++) {
             SelectList = envNamesSplit[i]
                         // echo " Currently Deploying this ${envNamesSplit[i]} service in ${inputEnvType}-ENVIROMENT @ ${env.inputnameSpace}-NAMESPACE"
-                     //   runDevDeployStages(SelectList)
+                        runDevDeployStages22(SelectList)
 
          }
 } 
+
+def runDevDeployStages22(SelectList){
+  echo "Deploying this service ${SelectList} ............. "
+  if ((env.inputnameSpace == "vault") && (!props.vault.contains($SelectList))){
+    echo "Not allowed to run this service $SelectList in this ${env.inputnameSpace}"
+  } else {
+    echo "allowed to run this service $SelectList in this ${env.inputnameSpace}"
+  }
+}
+
+
  def runDevDeployStages(SelectList){
 
             echo "Deploying this service ${SelectList} ............. "
