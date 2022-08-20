@@ -49,19 +49,20 @@ def runPipeline(props){// Deployment start
             for (i = 0; i < envNamesSplit.size();i++) {
             SelectList = envNamesSplit[i]
                         // echo " Currently Deploying this ${envNamesSplit[i]} service in ${inputEnvType}-ENVIROMENT @ ${env.inputnameSpace}-NAMESPACE"
-                        runDevDeployStages22(SelectList)
+                        runDevDeployStages(SelectList)
 
          }
 } 
 
-def runDevDeployStages22(SelectList){
+def serviceValidationStages(props){
   echo "Deploying this service ${SelectList} ............. "
   lisT = props.vault
   echo "List $lisT"
   if ((env.inputnameSpace == "vault") && (!props.vault.contains("${SelectList}"))){
-    echo "Not allowed to run this service $SelectList in this ${env.inputnameSpace}"
+    echo "Your not allowed to run this service $SelectList in this namespace ${env.inputnameSpace}"
+    error "Your not allowed to run this service $SelectList in this namespace ${env.inputnameSpace}"
   } else {
-    echo "allowed to run this service $SelectList in this ${env.inputnameSpace}"
+    echo "Allowed to run this service $SelectList in this ${env.inputnameSpace}"
   }
 }
 
@@ -71,8 +72,9 @@ def runDevDeployStages22(SelectList){
             echo "Deploying this service ${SelectList} ............. "
              lisTUser = props.ldapApprovalGroup
              echo "lisTUser $lisTUser"
-          //  echo "kubectl deploy ${SelectList}"
-          //  echo " If required pip install shyaml"
+   stage("Service Validation Check"){
+     serviceValidationStages(props)
+   }
               stage("Regenerating Dynnamic_Values"){
                 sh """#!/bin/bash +e
                 cd Deployment
