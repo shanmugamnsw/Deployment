@@ -99,7 +99,9 @@ def serviceValidationStages(props){
                 sed -i "s|DYNAMIC_MEMORYMIN|\$MEMORYMIN|g" values.yaml
                 sed -i "s|DYNAMIC_CPUMAX|\$CPUMAX|g" values.yaml
                 sed -i "s|DYNAMIC_CPUMIN|\$CPUMIN|g" values.yaml
+                stage("Helm-Deploy"){
                 cat values.yaml
+                }
                 """
               }
  }
