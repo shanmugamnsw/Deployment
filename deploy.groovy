@@ -46,16 +46,18 @@ def runPipeline(props){// Deployment start
          // runthistage(props)
           //runDevDeployStages(Props)
           }
-  stage("Service-list Clollection"){
-            echo "Listed total Input-services is ${env.inputServiceList}"
-  }
-            envNamesSplit = env.inputServiceList.tokenize(",");
-            for (i = 0; i < envNamesSplit.size();i++) {
-            SelectList = envNamesSplit[i]
-                        // echo " Currently Deploying this ${envNamesSplit[i]} service in ${inputEnvType}-ENVIROMENT @ ${env.inputnameSpace}-NAMESPACE"
-                        runDevDeployStages(SelectList)
+          if (env.inputDeployType == "Deployment"){
+            stage("Service-list Clollection"){
+                echo "Listed total Input-services is ${env.inputServiceList}"
+                }
+                envNamesSplit = env.inputServiceList.tokenize(",");
+                for (i = 0; i < envNamesSplit.size();i++) {
+                    SelectList = envNamesSplit[i]
+                    // echo " Currently Deploying this ${envNamesSplit[i]} service in ${inputEnvType}-ENVIROMENT @ ${env.inputnameSpace}-NAMESPACE"
+                    runDevDeployStages(SelectList)
 
          }
+    }
 } 
 
 def serviceValidationStages(props){
