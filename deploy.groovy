@@ -40,8 +40,8 @@ def runPipeline(props){// Deployment start
             echo "Demonset"
          }
 
-
-         if ((env.inputEnvType != "PROD") || (env.inputnameSpace != "<select>") || (env.inputDeployType == "Deployment")){
+         if (((env.inputEnvType == 'STG') || (env.inputEnvType == 'PROD')) && (env.inputDeployType == "Deployment")){
+         //if ((env.inputEnvType != "PROD") || (env.inputnameSpace != "<select>") || (env.inputDeployType == "Deployment")){
           echo "Selected Env is ${env.inputEnvType} && Namespace is ${env.inputnameSpace}"
          // runthistage(props)
           //runDevDeployStages(Props)
