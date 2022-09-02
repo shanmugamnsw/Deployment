@@ -38,6 +38,7 @@ def runPipeline(props){// Deployment start
    //      }
          if ((env.inputEnvType != "PROD") || (env.inputnameSpace != "<select>") && (env.inputDeployType != "Deployment")){
             echo "Demonset"
+            runDemonsetStage(props)
          }
 
          if (((env.inputEnvType == 'STG') || (env.inputEnvType == 'PROD')) && (env.inputDeployType == "Deployment")){
@@ -123,6 +124,13 @@ def serviceValidationStages(props){
                 pwd
                 sed -i "s|DYNAMIC_TAG| '\$TAG' |g" values.yaml 
                 helm template . */
+
+ def runDemonsetStage(props){
+    stage(" Demonset Deploy stage"){
+        echo "Deploying demonset"
+    }
+ }
+
  /*------------------------------------------------------------------------------------------------------------------------
         Approval- Stage
   -------------------------------------------------------------------------------------------------------------------------*/
