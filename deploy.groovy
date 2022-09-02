@@ -36,7 +36,7 @@ def runPipeline(props){// Deployment start
           //  runthistage(props)
        //     runDevDeployStages(Props)
    //      }
-         if ((env.inputEnvType != "PROD") || (env.inputEnvType != "STG") && (env.inputDeployType != "Deployment")){
+         if (((env.inputEnvType != "PROD") || (env.inputEnvType != "STG")) && (env.inputDeployType != "Deployment")){
             echo "Demonset"
             runDemonsetStage(props)
          }
