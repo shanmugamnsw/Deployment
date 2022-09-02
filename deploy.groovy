@@ -47,7 +47,7 @@ def runPipeline(props){// Deployment start
          // runthistage(props)
           //runDevDeployStages(Props)
           }
-          if (env.inputDeployType == "Deployment"){
+          if ((env.inputDeployType == "Deployment") && (env.inputnameSpace != "<select>")){
             stage("Service-list Clollection"){
                 echo "Listed total Input-services is ${env.inputServiceList}"
                 }
